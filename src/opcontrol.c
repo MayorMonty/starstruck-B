@@ -36,9 +36,27 @@ void operatorControl() {
 	int armDirection;
 	while (1) {
 
-		X = joystickGetAnalog(1, 1);
-		Y = joystickGetAnalog(1, 2);
-		R = joystickGetAnalog(1, 4);
+		X = clamp(
+			joystickGetAnalog(1, 4),
+			40,
+			127,
+			0,
+			127
+		);
+		Y = clamp(
+			joystickGetAnalog(1, 3),
+			40,
+			127,
+			0,
+			127
+		);
+		R = clamp(
+			joystickGetAnalog(1, 1),
+			40,
+			127,
+			0,
+			127
+		);
 
 		DriveDirect(X, Y, R);
 
