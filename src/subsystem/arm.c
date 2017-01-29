@@ -9,16 +9,16 @@
 
 #include "subsystem/arm.h"
 
-int armSpeed = 60;
+int armSpeed = 50;
 
 void moveArm(int direction) {
 
   direction *= armSpeed;
 
   motorSet(ArmOuterLeft, direction);
-  motorSet(ArmInnerLeft, direction);
+  motorSet(ArmInnerLeft, -direction);
   motorSet(ArmInnerRight, -direction);
-  motorSet(ArmOuterRight, -direction);
+  motorSet(ArmOuterRight, direction);
 
 }
 
