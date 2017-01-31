@@ -10,11 +10,11 @@
 #include "main.h"
 
 
-void Drive(double heading, double speed, int rotation) {
-
-
-
-
+void DriveHeading(double heading, double speed, int rotation) {
+	int X = cos(heading) * speed * maxMotorSpeed,
+		  Y = sin(heading) * speed * maxMotorSpeed,
+		  R = rotation;
+	DriveDirect(X, Y, R);
 }
 
 
