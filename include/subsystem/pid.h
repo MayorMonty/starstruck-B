@@ -10,6 +10,8 @@
 #ifndef INCLUDE_PID_H_
 #define INCLUDE_PID_H_
 
+enum sensorTypes = { IME, GYRO }
+
 typedef struct {
 
   /** PID Variables **/
@@ -20,6 +22,10 @@ typedef struct {
   /** Long term, non configured, calculated variables **/
   int lastError;
   int deltaError;
+
+  /** Sensors, used in PID strategies, but not base **/
+  int sensorPorts[];
+  enum sensorTypes sensorType;
 
 } PIDConfiguration;
 
