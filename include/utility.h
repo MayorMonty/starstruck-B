@@ -1,10 +1,8 @@
 /*
- * @file: utility.h
- *
- *  Created on: January 26, 2017
- *      Author: Brendan McGuire
- *
- *  This header file defines utility functions
+ * @file utility.h
+ * @created January 26, 2017
+ * @author Brendan McGuire
+ * @brief This header file defines utility functions
  */
 
 #ifndef INCLUDE_UTILITY_H_

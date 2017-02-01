@@ -1,10 +1,8 @@
 /*
- @file: arm.c
- *
- *  Created on: January 27, 2017
- *      Author: Brendan McGuire
- *
- *  Implementor for arm.h
+ * @file arm.c
+ * @created January 27, 2017
+ * @author Brendan McGuire
+ * @brief Implementor for arm.h
  */
 
 #include "subsystem/arm.h"

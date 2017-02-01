@@ -1,5 +1,7 @@
 /** @file opcontrol.c
- * @brief File for operator control code
+ *  @created January 18, 2017
+ *  @author Brendan McGuire
+ *  @brief File for operator control code
  *
  * This file should contain the user operatorControl() function and any functions related to it.
  *
