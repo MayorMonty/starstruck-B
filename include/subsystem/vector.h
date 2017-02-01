@@ -1,5 +1,5 @@
 /*
- * vector.h
+ @file: vector.h
  *
  *  Created on: January 26, 2017
  *      Author: Brendan McGuire
