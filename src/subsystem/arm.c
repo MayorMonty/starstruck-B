@@ -9,20 +9,25 @@
 
 #include "subsystem/arm.h"
 
-int armSpeed = 50;
+int armSpeedMoveUp = 60;
+int armSpeedMoveDown = 60;
 
-void moveArm(int direction) {
+int armSpeedFling = 100;
 
-  direction *= armSpeed;
+void moveArm(int direction, bool fling) {
+  if (direction == -1) {
+    direction *= armSpeedMoveDown;
+  } else {
+    if (fling) {
+      direction *= armSpeedFling;
+    } else {
+      direction *= armSpeedMoveUp;
+    }
+  }
 
   motorSet(ArmOuterLeft, direction);
   motorSet(ArmInnerLeft, -direction);
   motorSet(ArmInnerRight, -direction);
   motorSet(ArmOuterRight, direction);
 
-}
-
-int setArmSpeed(int speed) {
-  armSpeed = speed;
-  return speed;
 }

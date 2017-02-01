@@ -24,15 +24,8 @@
  * Moves the arm a certain direction in the preset speed (look at the define preprocessor instruction)
  * @method moveArm
  * @param direction The direction to move it in, see ArmDirection
+ * @param fling     Whether you want to fling
  */
-void moveArm(int direction);
-
-/**
- * Sets the speed to move the arm
- * @method setArmSpeed
- * @param  speed       The speed to set
- * @return             The speed
- */
-int setArmSpeed(int speed);
+void moveArm(int direction, bool fling);
 
 #endif /* INCLUDE_ARM_H_ */

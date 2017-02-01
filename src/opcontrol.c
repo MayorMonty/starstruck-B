@@ -34,6 +34,7 @@
 void operatorControl() {
 	int X, Y, R;
 	int armDirection;
+	bool fling = false;
 	while (1) {
 
 		X = clamp(
@@ -60,9 +61,14 @@ void operatorControl() {
 
 		DriveDirect(X, Y, R);
 
-		armDirection = joystickGetDigital(1, 6, JOY_UP) ? 1 : joystickGetDigital(1, 6, JOY_DOWN) ? -1 : 0;
+		if (joystickGetDigital(1, 5, JOY_UP)) {
+			armDirection = 1;
+			fling = true;
+		} else {
+			armDirection = joystickGetDigital(1, 6, JOY_UP) ? 1 : joystickGetDigital(1, 6, JOY_DOWN) || joystickGetDigital(1, 5, JOY_DOWN) ? -1 : 0;
+		}
 
-		moveArm(armDirection);
+		moveArm(armDirection, fling);
 
 	}
 }
