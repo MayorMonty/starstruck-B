@@ -8,11 +8,11 @@
 
 #include "subsystem/drive.h"
 #include "main.h"
-
+#include <math.h>
 
 void DriveHeading(double heading, double speed, int rotation) {
-	int X = cos(heading) * speed * maxMotorSpeed,
-		  Y = sin(heading) * speed * maxMotorSpeed,
+	int X = cos(heading) * speed * 127,
+		  Y = sin(heading) * speed * 127,
 		  R = rotation;
 	DriveDirect(X, Y, R);
 }
