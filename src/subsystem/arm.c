@@ -10,7 +10,7 @@
 #include "subsystem/arm.h"
 
 int armSpeedMoveUp = 60;
-int armSpeedMoveDown = 60;
+int armSpeedMoveDown = 40;
 
 int armSpeedFling = 100;
 
