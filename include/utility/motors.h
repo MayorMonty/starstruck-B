@@ -1,8 +1,7 @@
 /*
- @file: drive.h
- *
- *  Created on: January 26, 2017
- *      Author: Brendan McGuire
+ * @file: drive.h
+ * @created January 26, 2017
+ * @author Brendan McGuire
  *
  *  This header file defines name => motor bindings
  */

@@ -5,10 +5,10 @@
  * @brief Implementor for arm.h
  */
 
-#include "subsystem/arm.h"
+#include "utility/arm.h"
 
 int armSpeedMoveUp = 60;
-int armSpeedMoveDown = 40;
+int armSpeedMoveDown = 35;
 
 int armSpeedFling = 100;
 

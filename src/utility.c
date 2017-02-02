@@ -1,10 +1,9 @@
 /**
- @file: utility.c
+ * @file: utility.c
+ * @created 1/26/17
+ * @author Brendan McGuire
  *
- * Created On: 1/26/17
- * Author: Brendan McGuire
- *
- * Common utility functions incorporated by multiple subsystems
+ * Common utility functions incorporated by multiple utilitys
  */
 
 #include "main.h"

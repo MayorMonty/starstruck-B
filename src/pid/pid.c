@@ -1,8 +1,7 @@
 /*
- @file: pid.c
- *
- *  Created on: January 28, 2017
- *      Author: Brendan McGuire
+ * @file: pid.c
+ * @created January 28, 2017
+ * @author Brendan McGuire
  *
  * This is a generalized PID implementation, which takes a pregiven current value and caclulates motor values. This
  * specifically modularizes sensor information for implmeneting PIDs on places where you have to manipulate the sensor input,
@@ -18,44 +17,49 @@
  * strategies/ subdirectory of include and src.
  */
 
-#include "main.h"
-#include "subsystem/pid.h"
+#include <main.h>
+#include "pid/pid.h"
 
-
-PIDConfiguration resetPID(PIDConfiguration *pid) {
+void resetPID(PIDConfiguration *pid) {
   pid -> lastError = 0;
   pid -> totalError = 0;
-
-  return pid;
+  pid -> complete = false;
 }
 
-PIDConfiguration configurePID(PIDConfiguration *pid, float P, float I, float D) {
+void configurePID(PIDConfiguration *pid, double P, double I, double D) {
+
+  resetPID(&pid);
 
   pid -> P = P;
   pid -> I = I;
-  pid -> D = D
-
-  return pid;
+  pid -> D = D;
 }
 
-PIDConfiguration calculatePID(PIDConfiguration *pid, float target, float value) {
+int calculatePID(PIDConfiguration *pid, int target, double value) {
 
   // Put the PID Configuration into local variables for convience
-  float Kp, Ki, Kd =
-    pid -> P, pid -> I, pid -> D;
+  double Kp = pid -> P;
+  double Ki = pid -> I;
+  double Kd = pid -> D;
 
   // The amount we are from our target
-  float error = target - value;
+  double error = target - value;
 
   // The amount of wrong we are from our target, in general
-  pid -> deltaError += error;
+  pid -> totalError += error;
 
-  float output = (Kp * error) +
-         (Ki * pid -> deltaError) +
+  double output = (Kp * error) +
+         (Ki * pid -> totalError) +
          (Kd * pid -> lastError);
 
   // The amount of wrong were just were
   pid -> lastError = error;
+
+  if (error == 0) {
+    pid->complete = true;
+  } else {
+    pid->complete = false;
+  }
 
   return (int) output;
 

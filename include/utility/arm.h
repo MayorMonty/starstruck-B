@@ -1,8 +1,7 @@
 /*
- @file: arm.h
- *
- *  Created on: January 27, 2017
- *      Author: Brendan McGuire
+ * @file: arm.c
+ * @created January 27, 2017
+ * @author Brendan McGuire
  *
  *  This header file defines all functions which are related to the arm, right now just direct arm control
  */

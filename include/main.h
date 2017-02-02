@@ -40,8 +40,8 @@
 
 #ifndef MAIN_H_
 #include <API.h>
-#include "subsystem/motors.h"
-#include "utility.h"
+#include <math.h>
+
 // This prevents multiple inclusion, which isn't bad for this file but is good practice
 #define MAIN_H_
 

@@ -12,13 +12,14 @@
  * obtained from http://sourceforge.net/projects/freertos/files/ or on request.
  */
 
+#include "abstractions/drive.h"
+#include "utility/arm.h"
 #include "main.h"
-#include "subsystem/drive.c"
-#include "subsystem/arm.c"
+#include "utility.h"
 
 /*
  * Runs the user operator control code. This function will be started in its own task with the
- * default priority and stack size whenever the robot is enabled via the Field Management System
+ * default priority and stack size whenever the robot is enabled via he Field Management System
  * or the VEX Competition Switch in the operator control mode. If the robot is disabled or
  * communications is lost, the operator control task will be stopped by the kernel. Re-enabling
  * the robot will restart the task, not resume it from where it left off.
@@ -61,7 +62,8 @@ void operatorControl() {
 			127
 		);
 
-		DriveDirect(X, Y, R);
+		// Make rotation slower, we were losing our GOs
+		DriveDirect(X, Y, R * 0.9);
 
 		if (joystickGetDigital(1, 5, JOY_UP)) {
 			armDirection = 1;
