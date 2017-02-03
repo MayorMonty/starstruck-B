@@ -16,6 +16,7 @@
 #include "utility/arm.h"
 #include "main.h"
 #include "utility.h"
+#include "utility/motors.h"
 
 /*
  * Runs the user operator control code. This function will be started in its own task with the
@@ -34,6 +35,39 @@
  *
  * This task should never exit; it should end with some kind of infinite loop, even if empty.
  */
+// @HACK: Moving these definitions into driver control for now
+ void DriveDirect(int X, int Y, int R) {
+
+   motorSet(DriveFrontLeft,  +Y + X + R);
+   motorSet(DriveBackLeft,   +Y - X + R);
+   motorSet(DriveFrontRight, -Y + X + R);
+   motorSet(DriveBackRight,  -Y - X + R);
+
+ };
+
+ int armSpeedMoveUp = 60;
+ int armSpeedMoveDown = 35;
+
+ int armSpeedFling = 100;
+
+ void moveArm(int direction, bool fling) {
+   if (direction == -1) {
+     direction *= armSpeedMoveDown;
+   } else {
+     if (fling) {
+       direction *= armSpeedFling;
+     } else {
+       direction *= armSpeedMoveUp;
+     }
+   }
+
+   motorSet(ArmOuterLeft, direction);
+   motorSet(ArmInnerLeft, -direction);
+   motorSet(ArmInnerRight, -direction);
+   motorSet(ArmOuterRight, direction);
+
+ }
+
 void operatorControl() {
 	int X, Y, R;
 	int armDirection;
