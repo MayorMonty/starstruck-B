@@ -59,12 +59,14 @@ void StrategyTaskXDriveRotate(XDriveStrategy *strategy, double heading, void (*c
   // Hold the configuration in a variable
   PIDConfiguration rotate = strategy->configR;
   double turnCircumfrence = strategy->turnDiameter * M_PI;
+  // Ticks to begin a complete rotation
   int turnTicks = inchesToTicks(turnCircumfrence, strategy->motorType, strategy->wheelDiameter);
+  int target = (int) turnTicks * 2 * M_PI / heading;
   while(!rotate.complete) {
 
     updateIME(&strategy->imeLeft);
     DriveDirect(0, 0,
-      calculatePID(&rotate, turnTicks, strategy->imeLeft.value)
+      calculatePID(&rotate, target, strategy->imeLeft.value)
     );
 
   };
@@ -111,4 +113,8 @@ void StrategyTaskXDriveTranslate(XDriveStrategy *strategy, PolarVector direction
     millis() - start
   );
 
+}
+
+void xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed)) {
+  print("Begin PID Turn");
 }

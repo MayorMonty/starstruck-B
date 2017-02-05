@@ -11,6 +11,8 @@
  */
 
 #include "main.h"
+#include "pid/strategies/xdrive.c"
+#include "pid/pid.c"
 
 /*
  * Runs pre-initialization code. This function will be started in kernel mode one time while the
@@ -22,6 +24,8 @@
  */
 void initializeIO() {
 }
+
+XDriveStrategy driveStrategy;
 
 /*
  * Runs user initialization code. This function will be started in its own task with the default
@@ -37,4 +41,41 @@ void initializeIO() {
  * can be implemented in this task if desired.
  */
 void initialize() {
+
+  printf("Begin initalize()");
+
+  setTeamName("3796B");
+
+  imeInitializeAll();
+
+  // Initalize the drive strategy
+  driveStrategy.wheelDiameter = 4;
+  driveStrategy.gearRatio = 1;
+  driveStrategy.motorType = TORQUE;
+
+  // The diameter of the turn circle
+  driveStrategy.turnDiameter = 15;
+
+  PIDConfiguration configX;
+  PIDConfiguration configY;
+  PIDConfiguration configR;
+
+  configurePID(&configX, 0, 0, 0);
+  configurePID(&configY, 0, 0, 0);
+  configurePID(&configR, 0, 0, 0);
+
+
+  driveStrategy.configX = configX;
+  driveStrategy.configY = configY;
+  driveStrategy.configR = configR;
+
+  IME imeLeft;
+  imeLeft.address = 0;
+  IME imeRight;
+  imeRight.address = 1;
+
+  driveStrategy.imeLeft = imeLeft;
+  driveStrategy.imeRight = imeRight;
+
+
 }

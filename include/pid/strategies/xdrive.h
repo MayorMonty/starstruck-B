@@ -26,7 +26,7 @@ typedef enum {
   QUAD
 } encoderType;
 
-typedef struct {
+typedef struct IME {
   // The address of the IME, from 0, the IME plugged into the cortex, up the daisy chain
   char address;
 
@@ -45,7 +45,7 @@ typedef struct {
 bool updateIME(IME *ime);
 
 
-typedef struct {
+typedef struct XDriveStrategy {
 
   // Any multipliers to worry about when converting inches => ticks
   double wheelDiameter;
@@ -68,6 +68,8 @@ typedef struct {
   IME imeRight;
 
 } XDriveStrategy;
+
+extern XDriveStrategy driveStrategy;
 
 /**
  * Just rotate the drive. Note: starts a task to control x drive, and stops it. THIS FUNCTION IS ASYNCHRONOUS

@@ -13,12 +13,12 @@
  * There are two main types of vectors. Cartesian Vectors are vectors defined by an x and y value,
  */
 
-typedef struct {
+typedef struct CartesianVector {
   double x;
   double y;
 } CartesianVector;
 
-typedef struct {
+typedef struct PolarVector {
   double r;
   double angle;
 } PolarVector;

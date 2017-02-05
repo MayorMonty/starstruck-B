@@ -18,7 +18,7 @@
  * @param  speed    The speed to travel at, a number from 0 to 1
  * @param  rotation The rotation to apply, in PWM
  */
-void Drive(double heading, double speed, int rotation);
+void DriveHeading(double heading, double speed, int rotation);
 
 /**
  * Directly drives the robot's drive base

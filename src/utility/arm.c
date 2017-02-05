@@ -7,8 +7,8 @@
 
 #include "utility/arm.h"
 
-int armSpeedMoveUp = 60;
-int armSpeedMoveDown = 35;
+int armSpeedMoveUp = 55;
+int armSpeedMoveDown = 30;
 
 int armSpeedFling = 100;
 

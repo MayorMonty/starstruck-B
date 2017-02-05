@@ -69,6 +69,9 @@
  }
 
 void operatorControl() {
+
+  print("Begin operatorControl()");
+
 	int X, Y, R;
 	int armDirection;
 	bool fling = false;

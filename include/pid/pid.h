@@ -10,7 +10,7 @@
 #ifndef INCLUDE_PID_H_
 #define INCLUDE_PID_H_
 
-typedef struct {
+typedef struct PIDConfiguration {
 
   /** PID Variables **/
   int P;
