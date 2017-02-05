@@ -12,7 +12,7 @@
  * obtained from http://sourceforge.net/projects/freertos/files/ or on request.
  */
 
-#include "abstractions/drive.h"
+#include "utility/drive.h"
 #include "utility/arm.h"
 #include "main.h"
 #include "utility.h"

@@ -5,7 +5,7 @@
  * @brief This abstraction represents a sensor
  */
 
-#include "abstractions/sensor.h"
+#include "utility/sensor.h"
 
 
 bool updateSensor(Sensor *sensor) {
