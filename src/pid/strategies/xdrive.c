@@ -10,14 +10,6 @@
 #include "utility/drive.h"
 #include "utility/vector.h"
 
-// Update Functions
-bool updateIME(IME *ime) {
-
-  ime->lastValue = ime->value;
-  return imeGet(ime->address, &ime->value);
-
-}
-
 // Convertions
 double ticksToRotations(int ticks, motorType motor) {
   switch (motor) {
