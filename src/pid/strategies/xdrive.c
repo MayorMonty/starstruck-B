@@ -35,13 +35,6 @@ int rotationsToTicks(double rotations, motorType motor) {
   return 0;
 }
 
-double ticksToInches(int ticks, double wheelDiameter, motorType motor) {
-    return ticksToRotations(ticks, motor) / wheelDiameter / M_PI;
-}
-
-int inchesToTicks(double ticks, double wheelDiameter, motorType motor) {
-    return rotationsToTicks(ticks, motor) * wheelDiameter * M_PI;
-}
 
 // TASKS
 void StrategyTaskXDriveRotate(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed)) {
