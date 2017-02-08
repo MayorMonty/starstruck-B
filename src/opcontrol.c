@@ -61,10 +61,9 @@
      }
    }
 
-   motorSet(ArmOuterLeft, direction);
    motorSet(ArmInnerLeft, -direction);
    motorSet(ArmInnerRight, -direction);
-   motorSet(ArmOuterRight, direction);
+   motorSet(ArmOuter, direction);
 
  }
 

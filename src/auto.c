@@ -17,8 +17,8 @@
 #include "utility/motors.h"
 #include "utility/vector.h"
 #include "utility/arm.h"
+#include "utility/units.h"
 
-#define PI 3.141592653
 
 #define degreesToRadians(angleDegrees) (angleDegrees * PI / 180.0)
 #define radiansToDegrees(angleRadians) (angleRadians * 180.0 / PI)

@@ -11,7 +11,7 @@
  */
 
 #include "main.h"
-#include "pid/strategies/xdrive.c"
+#include "pid/strategies/xdrive.h"
 #include "pid/pid.c"
 
 /*
