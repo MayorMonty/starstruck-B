@@ -11,10 +11,10 @@
 
 #define DriveFrontLeft  2
 #define DriveBackLeft   3
-#define ArmOuterLeft    4
+#define ArmOuter        4
 #define ArmInnerLeft    5
 #define ArmInnerRight   6
-#define ArmOuterRight   7
+#define Claw            7
 #define DriveFrontRight 8
 #define DriveBackRight  9
 
