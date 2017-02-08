@@ -6,6 +6,8 @@
  */
 
 #include "utility/arm.h"
+#include "main.h"
+#include "utility/motors.h"
 
 int armSpeedMoveUp = 55;
 int armSpeedMoveDown = 30;
@@ -23,9 +25,8 @@ void moveArm(int direction, bool fling) {
     }
   }
 
-  motorSet(ArmOuterLeft, direction);
   motorSet(ArmInnerLeft, -direction);
   motorSet(ArmInnerRight, -direction);
-  motorSet(ArmOuterRight, direction);
+  motorSet(ArmOuter, direction);
 
 }

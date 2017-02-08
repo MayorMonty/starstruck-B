@@ -9,17 +9,13 @@
 #include <API.h>
 #include <pid/pid.h>
 #include <math.h>
+#include "utility/sensors/ime.h"
+#include "utility/units.h"
 
 #ifndef INCLUDE_XDRIVE_H_
 #define INCLUDE_XDRIVE_H_
 
 #define oneOverRootTwo 1 / sqrt(2);
-
-typedef enum {
-  TORQUE,
-  HIGHSPEED,
-  TURBO
-} motorType;
 
 typedef enum {
   INTEGRATED,
@@ -70,49 +66,6 @@ void xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int e
  * @param  callback   The function to call upon completion, which must accept one argument, elapsed, the number of milliseconds it took to complete the action
  */
 void xdriveMove(XDriveStrategy *strategy, PolarVector direction, void (*callback)(int elapsed));
-
-
-/** CONVERSION FUNCTIONS **/
-
-/**
- * Convert ticks to rotations
- * @method ticksToRotations
- * @param  ticks           Ticks
- * @param  motor           The motor type
- * @return                 Rotations
- */
-double ticksToRotations(int ticks, motorType motor);
-
-/**
- * Converts rotations to ticks
- * @method rotationsToTicks
- * @param  rotations        Rotations
- * @param  motor            Motor Type
- * @return                  Ticks
- */
-int rotationsToTicks(double rotations, motorType motor);
-
-/**
- * Convert ticks to inches
- * @method ticksToInches
- * @param  ticks         Ticks
- * @param  wheelDiameter The wheel diameter
- * @param  motor         The motor type
- *
- * @return               Inches
- */
-double ticksToInches(int ticks, double wheelDiameter, motorType motor);
-
-/**
- * Convert inches to ticks
- * @method inchesToTicks
- * @param  inches        Inches
- * @param  wheelDiameter The wheel diameter
- * @param  motor         The motor type
- *
- * @return               Ticks
- */
-int inchesToTicks(double inches, double wheelDiameter, motorType motor);
 
 
 /** PID Control Tasks **/
