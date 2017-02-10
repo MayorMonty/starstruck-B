@@ -45,7 +45,7 @@
 
  };
 
- int armSpeedMoveUp = 60;
+ int armSpeedMoveUp = 100;
  int armSpeedMoveDown = 35;
 
  int armSpeedFling = 100;
@@ -61,18 +61,23 @@
      }
    }
 
-   motorSet(ArmInnerLeft, -direction);
+   motorSet(ArmInnerLeft, direction);
    motorSet(ArmInnerRight, -direction);
-   motorSet(ArmOuter, direction);
+   motorSet(ArmOuter, -direction);
 
  }
+
+ void moveClaw(int power) {
+     motorSet(Claw, power);
+ }
+
 
 void operatorControl() {
 
   print("Begin operatorControl()");
 
 	int X, Y, R;
-	int armDirection;
+	int armDirection, clawDirection;
 	bool fling = false;
 	while (1) {
 
@@ -101,14 +106,17 @@ void operatorControl() {
 		// Make rotation slower, we were losing our GOs
 		DriveDirect(X, Y, R * 0.9);
 
-		if (joystickGetDigital(1, 5, JOY_UP)) {
-			armDirection = 1;
-			fling = true;
-		} else {
-			armDirection = joystickGetDigital(1, 6, JOY_UP) ? 1 : joystickGetDigital(1, 6, JOY_DOWN) || joystickGetDigital(1, 5, JOY_DOWN) ? -1 : 0;
-		}
+		armDirection = joystickGetDigital(1, 6, JOY_UP) ? 1 : joystickGetDigital(1, 6, JOY_DOWN) ? -1 : 0;
 
 		moveArm(armDirection, fling);
+
+    // Claw instructions
+    clawDirection = joystickGetDigital(1, 5, JOY_UP) ? 90 : joystickGetDigital(1, 5, JOY_DOWN) ? -90 : 0;
+
+    moveClaw(clawDirection);
+
+
+
 
 	}
 }

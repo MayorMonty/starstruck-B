@@ -9,8 +9,8 @@
 #include "main.h"
 #include "utility/motors.h"
 
-int armSpeedMoveUp = 55;
-int armSpeedMoveDown = 30;
+int armSpeedMoveUp = 100;
+int armSpeedMoveDown = 40;
 
 int armSpeedFling = 100;
 
@@ -26,7 +26,11 @@ void moveArm(int direction, bool fling) {
   }
 
   motorSet(ArmInnerLeft, -direction);
-  motorSet(ArmInnerRight, -direction);
-  motorSet(ArmOuter, direction);
+  motorSet(ArmInnerRight, direction);
+  motorSet(ArmOuter, -direction);
 
+}
+
+void moveClaw(int power) {
+    motorSet(Claw, power);
 }
