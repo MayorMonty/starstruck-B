@@ -27,4 +27,13 @@
  */
 void moveArm(int direction, bool fling);
 
+
+/**
+ * Moves the claw at the specified power
+ * @method moveClaw
+ * @param  power    The power to move the claw at
+ */
+void moveClaw(int power);
+
+
 #endif /* INCLUDE_ARM_H_ */
