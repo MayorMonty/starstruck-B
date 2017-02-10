@@ -56,7 +56,7 @@ extern XDriveStrategy driveStrategy;
  * @param  heading    The number of radians to rotate
  * @param  callback   The function to call upon completion, which must accept one argument, elapsed, the number of milliseconds it took to complete the action
  */
-void xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed));
+TaskHandle xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed));
 
 /**
  * Just translate the drive. THIS FUNCTION IS ASYNCHRONOUS
@@ -65,7 +65,7 @@ void xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int e
  * @param  direction  A polar vector representing the direction and mangitude to travel, with the radius defined in inches
  * @param  callback   The function to call upon completion, which must accept one argument, elapsed, the number of milliseconds it took to complete the action
  */
-void xdriveMove(XDriveStrategy *strategy, PolarVector direction, void (*callback)(int elapsed));
+TaskHandle xdriveMove(XDriveStrategy *strategy, PolarVector direction, void (*callback)(int elapsed));
 
 
 /** PID Control Tasks **/

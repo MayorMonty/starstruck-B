@@ -40,13 +40,13 @@
 
 
 void autonomous() {
-    DriveDirect(0, -80, 0);
-    delay(500);
-    moveArm(1, false);
-    delay(1400);
-    moveArm(0, false);
-    delay(1600);
-    DriveDirect(0, 0, 0);
+    // DriveDirect(0, -80, 0);
+    // delay(500);
+    // moveArm(1, false);
+    // delay(1400);
+    // moveArm(0, false);
+    // delay(1600);
+    // DriveDirect(0, 0, 0);
     // Drive(0, -80, 0);
     // delay(1800);
     // moveArm(1, false);

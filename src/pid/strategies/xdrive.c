@@ -9,6 +9,7 @@
 #include <math.h>
 #include "utility/drive.h"
 #include "utility/vector.h"
+#include <API.h>
 
 // Convertions
 double ticksToRotations(int ticks, motorType motor) {
@@ -36,22 +37,39 @@ int rotationsToTicks(double rotations, motorType motor) {
 }
 
 
+
+typedef struct XDriveRotateOrder {
+
+  XDriveStrategy *strategy;
+
+  double heading;
+
+  void (*callback)(int elapsed);
+
+} XDriveRotateOrder;
 // TASKS
-void StrategyTaskXDriveRotate(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed)) {
+void StrategyTaskXDriveRotate(XDriveRotateOrder *moveOrder) {
+
+  // Put the struct variables into their own reference
+  XDriveStrategy strategy = moveOrder->&strategy;
+  double heading = moveOrder->heading;
+  void (*callback)(int elapsed) = moveOrder->callback;
+
+
   // Start Time
   int start = millis();
 
   // Hold the configuration in a variable
-  PIDConfiguration rotate = strategy->configR;
-  double turnCircumfrence = strategy->turnDiameter * M_PI;
+  PIDConfiguration rotate = strategy.configR;
+  double turnCircumfrence = strategy.turnDiameter * PI;
   // Ticks to begin a complete rotation
-  int turnTicks = inchesToTicks(turnCircumfrence, strategy->motorType, strategy->wheelDiameter);
-  int target = (int) turnTicks * 2 * M_PI / heading;
+  int turnTicks = inchesToTicks(turnCircumfrence, strategy.wheelDiameter, strategy.motorType);
+  int target = (int) turnTicks * 2 * PI / heading;
   while(!rotate.complete) {
 
-    updateIME(&strategy->imeLeft);
+    updateIME(&strategy.imeLeft);
     DriveDirect(0, 0,
-      calculatePID(&rotate, target, strategy->imeLeft.value)
+      calculatePID(&rotate, target, strategy.imeLeft.value)
     );
 
   };
@@ -61,7 +79,22 @@ void StrategyTaskXDriveRotate(XDriveStrategy *strategy, double heading, void (*c
   );
 }
 
-void StrategyTaskXDriveTranslate(XDriveStrategy *strategy, PolarVector direction, void (*callback)(int elapsed)) {
+
+typedef struct XDriveMoveOrder {
+
+  XDriveStrategy *strategy;
+
+  PolarVector direction;
+
+  void (*callback)(int elapsed);
+
+} XDriveMoveOrder;
+
+void StrategyTaskXDriveTranslate(XDriveMoveOrder *moveOrder) {
+
+  XDriveStrategy strategy = &moveOrder->strategy;
+  PolarVector direction = moveOrder->direction;
+  void (*callback)(int elapsed) = moveOrder->callback;
 
   // Start Time
   int start = millis();
@@ -69,13 +102,13 @@ void StrategyTaskXDriveTranslate(XDriveStrategy *strategy, PolarVector direction
   // The measured value from the tick value
   int ticksX, ticksY;
 
-  IME imeLeft = strategy->imeLeft;
-  IME imeRight = strategy->imeRight;
+  IME imeLeft = strategy.imeLeft;
+  IME imeRight = strategy.imeRight;
 
   int outX, outY;
 
-  PIDConfiguration X = strategy->configX;
-  PIDConfiguration Y = strategy->configY;
+  PIDConfiguration X = strategy.configX;
+  PIDConfiguration Y = strategy.configY;
 
   CartesianVector target = PolarToCartesian(direction);
 
@@ -100,6 +133,29 @@ void StrategyTaskXDriveTranslate(XDriveStrategy *strategy, PolarVector direction
 
 }
 
-void xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed)) {
-  print("Begin PID Turn");
+TaskHandle xdriveTurn(XDriveStrategy *strategy, double heading, void (*callback)(int elapsed)) {
+  return taskCreate(
+    StrategyTaskXDriveRotate,
+    TASK_DEFAULT_STACK_SIZE,
+    (XDriveRotateOrder) {
+      strategy,
+      heading,
+      callback
+    },
+    TASK_PRIORITY_DEFAULT
+  );
+}
+
+
+TaskHandle xdriveMove(XDriveStrategy *strategy, PolarVector direction, void (*callback)(int elapsed)) {
+  return taskCreate(
+    StrategyTaskXDriveRotate,
+    TASK_DEFAULT_STACK_SIZE,
+    (XDriveRotateOrder) {
+      strategy,
+      direction,
+      callback
+    },
+    TASK_PRIORITY_DEFAULT
+  );
 }

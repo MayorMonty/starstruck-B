@@ -45,8 +45,8 @@
 
  };
 
- int armSpeedMoveUp = 100;
- int armSpeedMoveDown = 35;
+ int armSpeedMoveUp = 110;
+ int armSpeedMoveDown = 55;
 
  int armSpeedFling = 100;
 
