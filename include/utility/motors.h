@@ -14,6 +14,7 @@
 #define ArmOuter        4
 #define ArmInnerLeft    5
 #define ArmInnerRight   6
+#define Claw            7
 #define DriveFrontRight 8
 #define DriveBackRight  9
 
