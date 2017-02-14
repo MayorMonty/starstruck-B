@@ -27,6 +27,14 @@
  */
 void moveArm(int direction, bool fling);
 
+/**
+ * Moves the arm
+ * @method moveArmDirect
+ * @param power The PWM to set
+ */
+void moveArmDirect(int power);
+
+
 
 /**
  * Moves the claw at the specified power
