@@ -13,9 +13,9 @@
 typedef struct PIDConfiguration {
 
   /** PID Variables **/
-  int P;
-  int I;
-  int D;
+  double P;
+  double I;
+  double D;
 
   /** Long term, non configured, calculated variables **/
   int lastError;
