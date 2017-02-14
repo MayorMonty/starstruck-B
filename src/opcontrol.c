@@ -46,7 +46,7 @@
  };
 
  int armSpeedMoveUp = 110;
- int armSpeedMoveDown = 55;
+ int armSpeedMoveDown = 70;
 
  int armSpeedFling = 100;
 
@@ -117,6 +117,6 @@ void operatorControl() {
 
 
 
-
+  delay(25);
 	}
 }
