@@ -13,12 +13,11 @@
 #include "main.h"
 #include "pid/pid.h"
 #include "utility/drive.h"
-#include "pid/strategies/xdrive.h"
 #include "utility/motors.h"
 #include "utility/vector.h"
 #include "utility/arm.h"
 #include "utility/units.h"
-
+#include <API.h>
 
 #define degreesToRadians(angleDegrees) (angleDegrees * PI / 180.0)
 #define radiansToDegrees(angleRadians) (angleRadians * 180.0 / PI)
@@ -38,8 +37,22 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 
+PIDConfiguration arm;
+Encoder leftEncoder;
+Encoder rightEncoder;
+
 
 void autonomous() {
+
+  moveClaw(80);
+  delay(100);
+  DriveDirect(0, -60, 0);
+  delay(5000);
+  DriveDirect(0, 0, 0);
+
+
+
+
     // DriveDirect(0, -80, 0);
     // delay(500);
     // moveArm(1, false);
