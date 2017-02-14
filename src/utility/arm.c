@@ -25,10 +25,13 @@ void moveArm(int direction, bool fling) {
     }
   }
 
-  motorSet(ArmInnerLeft, -direction);
-  motorSet(ArmInnerRight, direction);
-  motorSet(ArmOuter, -direction);
+  moveArmDirect(direction);
+}
 
+void moveArmDirect(int power) {
+  motorSet(ArmInnerLeft, -power);
+  motorSet(ArmInnerRight, power);
+  motorSet(ArmOuter, -power);
 }
 
 void moveClaw(int power) {
