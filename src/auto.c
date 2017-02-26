@@ -44,12 +44,47 @@ Encoder rightEncoder;
 
 void autonomous() {
 
-  moveClaw(80);
-  delay(100);
-  DriveDirect(0, -60, 0);
-  delay(5000);
-  DriveDirect(0, 0, 0);
+  for (int i = 0; i < 3; i++) {
 
+    if (i != 0) {
+      moveClaw(127);
+      delay(800);
+      DriveDirect(0, -127, 0);
+    } else {
+      moveClaw(127);
+      DriveDirect(0, -127, 0);
+    }
+
+    delay(1000);
+    moveClaw(0.75);
+
+    delay(1500);
+
+    DriveDirect(0, 0, 0);
+    moveArm(1, 0);
+
+    delay(1300);
+
+    moveArm(-1, 0);
+    moveClaw(-127);
+
+    delay(300);
+
+    DriveDirect(0, 127, 0);
+    moveClaw(0);
+
+    delay(500);
+
+    moveArm(0, 0);
+    moveClaw(-127);
+
+    delay(300);
+    moveClaw(0);
+    delay(1000);
+    DriveDirect(0, 0, 0);
+    delay(500);
+
+  }
 
 
 
