@@ -1,57 +1,48 @@
-/**
- * @file: pid.h
- * @created January 28, 2017
+/*
+ * @file pid.h
+ * @created March 2, 2017
  * @author Brendan McGuire
- *
- *  This is a generalized PID implementation, which takes a pregiven current value and caclulates motor values. This specifically modularizes sensor information for implmeneting PIDs on places where you have to manipulate the sensor input, for example when adding a PID to an X Drive, you must manipulate the IMEs or Encoder values to get the actual distance traveled in one direction
+ * @brief Basic PID Implementation for PROS. This is built upon by PID Strategies, which provide PID Solutions to specific problems
  */
 
 
-#ifndef INCLUDE_PID_H_
-#define INCLUDE_PID_H_
+ #ifndef INCLUDE_PID_H_
+ #define INCLUDE_PID_H_
 
 typedef struct PIDConfiguration {
 
-  /** PID Variables **/
+  // Control Variables
   double P;
   double I;
   double D;
 
-  /** Long term, non configured, calculated variables **/
-  int lastError;
+  // Constraints
+  int outputMax = 127;
+  int outputMin = 0;
+
+  
+
+  // Tracking Variables
   int totalError;
-
-  /** State **/
-  bool complete;
-
-} PIDConfiguration;
+  int lastError;
+};
 
 
 /**
- * Configures a PID
- * @method configurePID
- * @param  pid          The PID to configure
- * @param  P            The P value
- * @param  I            The I value
- * @param  D            The D value
- */
-void configurePID(PIDConfiguration *pid, double P, double I, double D);
-
-/**
- * Calculates the correct motor value, based on a target
- * @method calculatePID
- * @param  pid          The pid configuration
- * @param  target       The target you wish to achieve
- * @param  value        The precalculated value from a sensor, or combination of sensors
- * @return              The output value
- */
-int calculatePID(PIDConfiguration *pid, int target, double value);
-
-/**
- * Resets the PID back to original configuration, for when you have a new "target"
- * @method resetPID
- * @param  pid      The PID Configuration to reset
+ * Resets a PID, remove any preexisting error. Use this in between drive actions, etc.
+ * @method initalizePID
+ * @param  pid          The PID Configuration to reset / initalize
  */
 void resetPID(PIDConfiguration *pid);
+
+/**
+ * Calculates the output of the PID when given input
+ * @method computePID
+ * @param  pid        The PID Configuration
+ * @param  target     The target you want to reach
+ * @param  sensor     The adjusted value from your sensors
+ * @return            The output to use
+ */
+int computePID(PIDConfiguration *pid, int target, int sensor);
 
 #endif /* INCLUDE_PID_H_ */

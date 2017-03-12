@@ -11,7 +11,6 @@
  */
 
 #include "main.h"
-#include "pid/pid.h"
 #include "utility/drive.h"
 #include "utility/motors.h"
 #include "utility/vector.h"
@@ -37,80 +36,115 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 
-PIDConfiguration arm;
-Encoder leftEncoder;
-Encoder rightEncoder;
-
-
 void autonomous() {
 
-  for (int i = 0; i < 3; i++) {
 
-    if (i != 0) {
-      moveClaw(127);
-      delay(800);
-      DriveDirect(0, -127, 0);
-    } else {
-      moveClaw(127);
-      DriveDirect(0, -127, 0);
-    }
+  // near/far - relative to the hanging bar
+  // 127 for red far, -127 for red near, 127 for blue near, -127 for blue far
+  int moveTowardsCenter = 127;
 
-    delay(1000);
-    moveClaw(0.75);
 
-    delay(1500);
+  // for (int i = 0; i < 2; i++) {
+  //   moveClaw(127);
+  //   DriveDirect(0, -127, 0);
+  //   delay(800);
+  //   moveClaw(-127);
+  //   DriveDirect(0, 0, 0);
+  //   delay(1000);
+  //   DriveDirect(0, -127, 0);
+  //   delay(1300);
+  //   moveArm(1, 0);
+  //   delay(200);
+  //   DriveDirect(0, 0, 0);
+  //   delay(500);
+  //   DriveDirect(0, 127, 0);
+  //   delay(2500);
+  // }
 
+  // // Programming Skills
+  // for (int i = 0; i < 2; i++) {
+  //
+  //   if (i != 0) {
+  //     moveClaw(127);
+  //     delay(800);
+  //     DriveDirect(0, -127, 0);
+  //   } else {
+  //     moveClaw(127);
+  //     DriveDirect(0, -127, 0);
+  //   }
+  //
+  //   delay(1000);
+  //   moveClaw(0.75);
+  //
+  //   delay(1500);
+  //
+  //   DriveDirect(0, 0, 0);
+  //   moveArm(1, 0);
+  //
+  //   delay(1300);
+  //
+  //   moveArm(-1, 0);
+  //   moveClaw(-127);
+  //
+  //   delay(300);
+  //
+  //   DriveDirect(0, 127, 0);
+  //   moveClaw(0);
+  //
+  //   delay(500);
+  //
+  //   moveArm(0, 0);
+  //   moveClaw(-127);
+  //
+  //   delay(300);
+  //   moveClaw(0);
+  //   delay(1000);
+  //   DriveDirect(0, 0, 0);
+  //   delay(500);
+  //
+  // }
+
+
+    // Autonomous
+
+    DriveDirect(0, -127, 0);
+    delay(2500);
+    // Stop moving the claw and drive, and move the Arm
     DriveDirect(0, 0, 0);
     moveArm(1, 0);
-
-    delay(1300);
-
-    moveArm(-1, 0);
-    moveClaw(-127);
-
-    delay(300);
-
-    DriveDirect(0, 127, 0);
-    moveClaw(0);
-
-    delay(500);
-
-    moveArm(0, 0);
-    moveClaw(-127);
-
-    delay(300);
+    moveClaw(127);
+    delay(600);
     moveClaw(0);
     delay(1000);
+    moveClaw(-127);
+    moveArm(0, 0);
+    delay(400);
+    moveClaw(0);
+    moveArm(-1, 0);
+    delay(600);
+    moveArm(0, 0);
+    DriveDirect(0, 80, 0);
+    delay(300);
     DriveDirect(0, 0, 0);
-    delay(500);
-
-  }
-
-
-
-    // DriveDirect(0, -80, 0);
-    // delay(500);
-    // moveArm(1, false);
-    // delay(1400);
-    // moveArm(0, false);
-    // delay(1600);
+    delay(400);
+    // // Section II: Translate the Drive until, we've reached the center
+    // DriveDirect(moveTowardsCenter, 0, 0);
+    // delay(1500);
     // DriveDirect(0, 0, 0);
-    // Drive(0, -80, 0);
-    // delay(1800);
-    // moveArm(1, false);
-    // delay(1000);
-    // Drive(0, 127, 0);
-    // moveArm(-1, false);
-    // delay(1000);
-    // moveArm(0, false);
-    // delay(1800);
-    // for (int i = 0; i < 3; i++) {
-    //   Drive(0, -127, 0);
-    //   delay(1800);
-    //   moveArm(1, true);
-    //   delay(1000);
-    //   Drive(0, -127, 0);
-    //   moveArm(-1, false);
-    // }
-
+    // delay(300);
+    // // Section III: Pick up the cube and launch it
+    // DriveDirect(0, 127, 0);
+    // delay(600);
+    // DriveDirect(0, 0, 0);
+    // moveClaw(127);
+    // delay(800);
+    // DriveDirect(0, -127, 0);
+    // moveClaw(127);
+    // delay(800);
+    // moveArm(1.27, 0);
+    // delay(2000);
+    // moveClaw(-127);
+    // DriveDirect(0, 0, 0);
+    // delay(600);
+    // moveClaw(0);
 }
